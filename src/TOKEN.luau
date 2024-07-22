@@ -1,1 +1,1 @@
-return "Insert bot token here"
+return "Insert Discord bot token here"
