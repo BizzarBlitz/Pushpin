@@ -16,15 +16,15 @@ return function(interaction: DiscordLuau.DiscordInteraction & {data: {[string]: 
 		return "This command can only be used in threads"
 	end
 
+	-- Make sure command user owns channel
 	local cachedUser = interaction.discordClient.discordCache:getData("DiscordUser", ownerId)
 	if not cachedUser then
-		return "Could not find user in cache"
+		return "You must be the thread author to pin/unpin messages (no-cache)"
 	end
 
-	-- Make sure command user owns channel
 	local userId = cachedUser.id
 	if userId ~= ownerId then
-		return "You must be the thread owner to pin/unpin messages"
+		return "You must be the thread author to pin/unpin messages"
 	end
 
 	-- Make sure pinned isn't maxxed out
