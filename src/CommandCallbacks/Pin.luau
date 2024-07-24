@@ -38,7 +38,7 @@ return function(interaction: DiscordLuau.DiscordInteraction & {data: {[string]: 
 	local message = channel:getMessageAsync(interaction.data.targetId):await()
 	
 	-- Make sure message is able to be pinned
-	if message.type ~= 1 and message.type ~= 19 then -- Normal or reply
+	if message.type ~= 0 and message.type ~= 19 then -- Normal or reply
 		return "Message cannot be pinned"
 	end
 
