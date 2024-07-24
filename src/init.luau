@@ -31,8 +31,6 @@ DiscordClient.eventManager.onMessage:connect(function(message: DiscordLuau.Disco
 end)
 
 DiscordClient.eventManager.onReady:connect(function()
-	print((DiscordClient.discordUser.username or "WHAT?! HELP ME!") .. " is online!!")
-
 	local pinCommand = DiscordLuau.CommandBuilder.new()
 		:setName("Pin/Unpin message")
 		:setType(DiscordLuau.CommandBuilder.Type.MessageContextAction)
@@ -48,3 +46,7 @@ DiscordClient.eventManager.onReady:connect(function()
 
 	DiscordClient.discordApplication:setSlashCommandsAsync({pinCommand, testCommand}):await()
 end)
+
+
+
+DiscordClient:connectAsync()

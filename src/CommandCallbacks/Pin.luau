@@ -4,9 +4,7 @@ local DiscordLuau = require("../../DiscordLuau")
 
 local MAX_PINNED: number = 50
 
-return function(interaction: DiscordLuau.DiscordInteraction, client: DiscordLuau.DiscordClient): string
-	warn("Command called:", interaction.user, interaction.data)
-
+return function(interaction: DiscordLuau.DiscordInteraction & {data: {[string]: any}}, client: DiscordLuau.DiscordClient): string
 	-- interaction:deferAsync():after(function()
 	
 	local channelId = interaction.data.resolved.messages[interaction.data.targetId].channelId
