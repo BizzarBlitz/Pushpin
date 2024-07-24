@@ -35,8 +35,12 @@ return function(interaction: DiscordLuau.DiscordInteraction & {data: {[string]: 
 	-- 	return `Channel has reached the pin limit of {MAX_PINNED} messages`
 	-- end
 	
-	-- Actually do things now
 	local message = channel:getMessageAsync(interaction.data.targetId):await()
+	
+	-- Make sure message is able to be pinned
+	if message.type ~= 1 and message.type ~= 19 then -- Normal or reply
+		return "Message cannot be pinned"
+	end
 
 	if message.pinned then
 		-- Unpin message
