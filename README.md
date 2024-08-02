@@ -6,6 +6,3 @@ Made with [Discord-Luau](https://github.com/DiscordLuau/Discord-Luau)
 ## Features
 * Autopins the first message in a forum post
 * Post/thread authors can right click on a message to pin it
-
-## Limitations
-* Silently warns if pin limit is exceeded

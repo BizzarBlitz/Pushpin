@@ -19,7 +19,7 @@ return function(interaction: DiscordLuau.DiscordInteraction & {data: {[string]: 
 	-- Make sure command user owns channel
 	local cachedUser = interaction.discordClient.discordCache:getData("DiscordUser", ownerId)
 	if not cachedUser then
-		return "You must be the thread author to pin/unpin messages (no-cache)"
+		return "You must be the thread author to pin/unpin messages (no cache)"
 	end
 
 	local userId = cachedUser.id
@@ -27,19 +27,18 @@ return function(interaction: DiscordLuau.DiscordInteraction & {data: {[string]: 
 		return "You must be the thread author to pin/unpin messages"
 	end
 
-	-- Make sure pinned isn't maxxed out
-	-- TODO: Issue with this function infinitely yielding after 2nd time?
-	-- local pinnedMessages = channel:getPinnedMessagesAsync():await()
-
-	-- if #pinnedMessages == MAX_PINNED then
-	-- 	return `Channel has reached the pin limit of {MAX_PINNED} messages`
-	-- end
-	
 	local message = channel:getMessageAsync(interaction.data.targetId):await()
 	
 	-- Make sure message is able to be pinned
 	if message.type ~= 0 and message.type ~= 19 then -- Normal or reply
 		return "Message cannot be pinned"
+	end
+
+	-- Make sure pinned isn't maxxed out
+	local pinnedMessages = channel:getPinnedMessagesAsync():await()
+
+	if #pinnedMessages == MAX_PINNED then
+		return `Channel has reached the pin limit of {MAX_PINNED} messages`
 	end
 
 	if message.pinned then
